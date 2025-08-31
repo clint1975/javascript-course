@@ -358,7 +358,7 @@ console.log(`I like to drink ${age >= 18 ? `wine` : `water`}`)
 ////////////////////////////////////
 // Coding Challenge #4
 
-const bill = 275; // Test with 275, 40, and 430
+const bill = 430; // Test with 275, 40, and 430
 
 // Step 1: Create the tip calculation using ternary operator
 // Rule: 15% if between 50-300, otherwise 20%
