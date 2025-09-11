@@ -192,3 +192,55 @@ console.log('Ready for visual polish in Hour 3!');
 
 // Test your complete game
 console.log('Test: Try to win, try to lose, then restart!');
+
+// WIN: set background to green
+if (guess === secretNumber) {
+  // ... your existing win logic ...
+  document.body.style.backgroundColor = 'green';
+}
+
+// LOSE: set background to red (place inside your lose condition)
+if (score < 1) {
+  // ... your existing lose logic ...
+  document.body.style.backgroundColor = 'red';
+}
+
+// RESTART: clear inline background so CSS default applies (inside the Again! handler)
+document.querySelector('.again').addEventListener('click', function () {
+  // ... your existing restart logic ...
+  document.body.style.backgroundColor = '';
+});
+
+// Input validation - check for valid input
+
+document.querySelector('.check').addEventListener('click', function () {
+  const guess = Number(document.querySelector('.guess').value);
+
+  // 1) Missing input
+  if (!guess) {
+    document.querySelector('.message').textContent = 'No number!';
+    return; // stop here
+  }
+
+  // 2) Out of range
+  if (guess < 1 || guess > 20) {
+    document.querySelector('.message').textContent =
+      'Number must be between 1 and 20!';
+    return; // stop here
+  }
+
+  // ... your existing game logic (win / too high / too low / update score / lose) ...
+});
+// In WIN block
+if (guess === secretNumber) {
+  // ... existing win logic ...
+  document.querySelector('.message').textContent = '🎉 Game Over!';
+  document.querySelector('.guess').value = '';
+}
+
+// In LOSE block
+if (score < 1) {
+  // ... existing lose logic ...
+  document.querySelector('.message').textContent = '💀 Game Over!';
+  document.querySelector('.guess').value = '';
+}
