@@ -115,3 +115,80 @@ console.log('Ready for advanced features in Hour 2!');
 
 console.log('Secret number for testing:', secretNumber);
 console.log('Try to guess it!');
+
+////////////////////////////////////
+// Score tracking - reduce score for wrong guesses
+
+// Add this inside your event listener, after the game logic
+if (guess === secretNumber) {
+  // ... existing win logic ...
+} else if (guess > secretNumber) {
+  console.log('Too high!');
+  document.querySelector('.message').textContent = '📈 Too high!';
+  // Say: "Add score decrementing here"
+  score--;
+} else if (guess < secretNumber) {
+  console.log('Too low!');
+  document.querySelector('.message').textContent = '📉 Too low!';
+  // Say: "Add score decrementing here"
+  score--;
+}
+// Update the score display after both wrong guesses
+document.querySelector('.score').textContent = score;
+
+// Win condition - detect when player wins
+
+if (guess === secretNumber) {
+  console.log('Correct guess!');
+  document.querySelector('.message').textContent = '🎉 Correct Number!';
+  document.querySelector('.number').textContent = secretNumber;
+
+  // Check if this is a new high score
+  if (score > highscore) {
+    highscore = score;
+    document.querySelector('.highscore').textContent = highscore;
+  }
+
+  // Show win message and disable further guessing
+  document.querySelector('.message').textContent = '🎉 You won!';
+  document.querySelector('.guess').disabled = true;
+  document.querySelector('.check').disabled = true;
+}
+
+// Add this after the score display update
+if (score < 1) {
+  document.querySelector('.message').textContent = '💥 You lost!';
+  document.querySelector('.number').textContent = secretNumber;
+  document.querySelector('.guess').disabled = true;
+  document.querySelector('.check').disabled = true;
+}
+
+// Game restart - reset everything for new game
+
+document.querySelector('.again').addEventListener('click', function () {
+  // Reset game state
+  score = 20;
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+
+  // Reset display
+  document.querySelector('.message').textContent = 'Start guessing...';
+  document.querySelector('.number').textContent = '?';
+  document.querySelector('.score').textContent = score;
+  document.querySelector('.guess').value = '';
+
+  // Re-enable input and button
+  document.querySelector('.guess').disabled = false;
+  document.querySelector('.check').disabled = false;
+});
+
+// Enhanced Game Verification
+
+console.log('🎮 Enhanced Game Complete!');
+console.log('✅ Score tracking working');
+console.log('✅ Win/lose conditions implemented');
+console.log('✅ Game restart functionality working');
+console.log('✅ Complete game experience ready');
+console.log('Ready for visual polish in Hour 3!');
+
+// Test your complete game
+console.log('Test: Try to win, try to lose, then restart!');
